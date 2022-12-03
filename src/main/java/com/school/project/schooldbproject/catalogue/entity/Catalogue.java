@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Setter
 @Builder
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Table(name = "catalogues")
 public class Catalogue {
     @Id

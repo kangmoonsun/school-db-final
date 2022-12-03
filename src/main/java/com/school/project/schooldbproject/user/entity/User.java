@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Setter
 @Builder
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
     @Id
@@ -19,6 +19,4 @@ public class User {
     private String name;
 
     private String address;
-
-
 }
