@@ -6,3 +6,5 @@
 - 강문선
 - 전민재
 - 한민우
+
+<img src="./school-db-erd.drawio.png">
