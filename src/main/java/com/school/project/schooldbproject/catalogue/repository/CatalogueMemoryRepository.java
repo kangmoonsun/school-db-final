@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Repository
-public class CatalogueMemoryRepositoryImpl implements CatalogueRepository {
+public class CatalogueMemoryRepository implements CatalogueRepository {
     private static final Map<Long, Catalogue> memoryDataSource = new HashMap<>();
     private static Long sequence = 0L;
 
@@ -27,7 +27,10 @@ public class CatalogueMemoryRepositoryImpl implements CatalogueRepository {
 
     @Override
     public Optional<Catalogue> findByName(String name) {
-        return memoryDataSource.values().stream().filter((catalogue) -> catalogue.getName().equals(name)).findFirst();
+        return memoryDataSource.values()
+                .stream()
+                .filter((catalogue) -> catalogue.getName().equals(name))
+                .findAny();
     }
 
 }
