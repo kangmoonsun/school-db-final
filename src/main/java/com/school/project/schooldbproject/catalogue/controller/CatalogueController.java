@@ -17,16 +17,15 @@ public class CatalogueController {
         this.catalogueService = catalogueService;
     }
 
-    @ResponseBody
     @PostMapping("catalogue")
+    @ResponseBody
     public Catalogue createCatalogue(@Valid @RequestBody CreateCatalogueDto createCatalogueDto) {
-        System.out.println("Call controller");
         return catalogueService.createCatalogue(createCatalogueDto);
     }
 
-    @ResponseBody
     @GetMapping("catalogue")
-    public Catalogue findByCatalogueName(@RequestParam(name = "name") String name) {
+    @ResponseBody
+    public Catalogue findByCatalogueName(@Valid @RequestParam(name = "name") String name) {
         return catalogueService.findCatalogueByName(name);
     }
 
