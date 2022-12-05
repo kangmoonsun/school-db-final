@@ -1,5 +1,6 @@
 package com.school.project.schooldbproject.order.dto;
 
+import com.school.project.schooldbproject.catalogue.entity.Catalogue;
 import com.school.project.schooldbproject.order.entity.OrderDetail;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,9 +12,12 @@ public class CreateOrderDetailDto {
     private Long quantity;
 
     public OrderDetail toEntity() {
+        Catalogue catalogue = new Catalogue();
+        catalogue.setId(catalogueId);
+
         return OrderDetail.builder()
+                .catalogue(catalogue)
 //                .paymentId()
-                .catalogueId(catalogueId)
                 .quantity(quantity)
                 .build();
     }

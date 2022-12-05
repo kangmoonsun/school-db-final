@@ -1,6 +1,7 @@
 package com.school.project.schooldbproject.branch.repository;
 
 import com.school.project.schooldbproject.branch.entity.Branch;
+import com.school.project.schooldbproject.user.entity.User;
 
 import java.util.Optional;
 
@@ -11,5 +12,5 @@ public interface BranchRepository {
 
     Optional<Branch> findByName(String name);
 
-    Optional<Branch> findByUserId(Long id);
+    Optional<Branch> findByUser(User user);
 }

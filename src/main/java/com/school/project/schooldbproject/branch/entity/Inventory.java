@@ -1,5 +1,6 @@
 package com.school.project.schooldbproject.branch.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.school.project.schooldbproject.catalogue.entity.Catalogue;
 import lombok.*;
 
@@ -15,6 +16,7 @@ import java.util.Date;
 @Builder
 public class Inventory {
     @Id
+    @Column(name = "inventory_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -22,19 +24,13 @@ public class Inventory {
 
     private Date createdAt;
 
-    @Column(name = "branchId", nullable = false)
-    private Long branchId;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "branchId", referencedColumnName = "id", insertable = false, updatable = false)
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "branch_id")
     private Branch branch;
 
-    @Column(name = "catalogueId", nullable = false)
-    private Long catalogueId;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "catalogueId", referencedColumnName = "id", insertable = false, updatable = false)
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "catalogue_id")
     private Catalogue catalogue;
-
-
 }

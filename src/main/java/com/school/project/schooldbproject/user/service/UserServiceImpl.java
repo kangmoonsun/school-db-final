@@ -1,7 +1,6 @@
 package com.school.project.schooldbproject.user.service;
 
 import com.school.project.schooldbproject.branch.entity.Branch;
-import com.school.project.schooldbproject.branch.repository.BranchRepository;
 import com.school.project.schooldbproject.global.error.exception.EntityNotFoundException;
 import com.school.project.schooldbproject.user.dto.CreateUserDto;
 import com.school.project.schooldbproject.user.dto.LoginDto;
@@ -12,18 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-
     private final UserRepository userRepository;
-    private final BranchRepository branchRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, BranchRepository branchRepository) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.branchRepository = branchRepository;
     }
 
 
@@ -36,11 +33,11 @@ public class UserServiceImpl implements UserService {
             throw new EntityNotFoundException("사용자를 찾을 수 없습니다.");
         }
 
-        Branch foundBranch = branchRepository.findByUserId(foundUser.getId())
+        Branch branch = Optional.ofNullable(foundUser.getBranch())
                 .orElseThrow(() -> new EntityNotFoundException("브랜치를 찾을 수 없습니다. 사용자 ID: " + foundUser.getId()));
 
         return LoginSuccessResponse.builder()
-                .branchId(foundBranch.getId())
+                .branchId(branch.getId())
                 .build();
     }
 

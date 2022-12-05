@@ -13,7 +13,6 @@ import javax.transaction.Transactional;
 @Transactional
 @Service
 public class BranchServiceImpl implements BranchService {
-
     private final BranchRepository branchRepository;
 
     @Autowired
@@ -26,7 +25,6 @@ public class BranchServiceImpl implements BranchService {
         Branch branch = createBranchDto.toEntity();
         return branchRepository.save(branch);
     }
-
 
     @Override
     public Branch findBranchById(Long id) {

@@ -1,5 +1,6 @@
 package com.school.project.schooldbproject.order.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.school.project.schooldbproject.catalogue.entity.Catalogue;
 import lombok.*;
 
@@ -14,6 +15,7 @@ import javax.persistence.*;
 @Builder
 public class OrderDetail {
     @Id
+    @Column(name = "order_detail_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -21,17 +23,13 @@ public class OrderDetail {
 
     private Long totalPrice;
 
-    @Column(name = "paymentId", nullable = false)
-    private Long paymentId;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "paymentId", referencedColumnName = "id", insertable = false, updatable = false)
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "payment_id")
     private Payment payment;
 
-    @Column(name = "catalogueId", nullable = false)
-    private Long catalogueId;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "catalogueId", referencedColumnName = "id", insertable = false, updatable = false)
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "catalogue_id")
     private Catalogue catalogue;
 }

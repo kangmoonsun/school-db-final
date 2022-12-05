@@ -1,6 +1,7 @@
 package com.school.project.schooldbproject.branch.repository;
 
 import com.school.project.schooldbproject.branch.entity.Branch;
+import com.school.project.schooldbproject.user.entity.User;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class BranchMemoryRepository implements BranchRepository {
     }
 
     @Override
-    public Optional<Branch> findByUserId(Long id) {
+    public Optional<Branch> findByUser(User user) {
         return Optional.empty();
     }
 }
