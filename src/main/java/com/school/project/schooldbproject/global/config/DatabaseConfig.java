@@ -2,7 +2,7 @@ package com.school.project.schooldbproject.global.config;
 
 import com.school.project.schooldbproject.catalogue.repository.CatalogueMemoryRepository;
 import com.school.project.schooldbproject.catalogue.repository.CatalogueRepository;
-import com.school.project.schooldbproject.user.repository.UserJpaRepository;
+import com.school.project.schooldbproject.user.repository.UserMemoryRepositoryImpl;
 import com.school.project.schooldbproject.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -27,7 +27,7 @@ public class DatabaseConfig {
 
     @Bean
     public UserRepository userRepository() {
-        return new UserJpaRepository(em);
-//        return new UserMemoryRepositoryImpl();
+//        return new UserJpaRepository(em);
+        return new UserMemoryRepositoryImpl();
     }
 }

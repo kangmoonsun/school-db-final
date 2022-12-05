@@ -17,4 +17,8 @@ public class Branch {
     private Long id;
 
     private String name;
+
+    /**
+     * Inventory one to many
+     * */
 }

@@ -20,4 +20,8 @@ public class Catalogue {
 
     private Long price;
 
+
+    /**
+     * Inventory one to many
+     * */
 }
