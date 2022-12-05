@@ -15,7 +15,6 @@ import java.util.Date;
 @Builder
 public class Inventory {
     @Id
-    @Column(name = "inventoryId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -23,18 +22,19 @@ public class Inventory {
 
     private Date createdAt;
 
-    @Column(name = "catalogueId")
-    private Long catalogueId;
-
-    @ManyToOne
-    @JoinColumn(name = "catalogueId")
-    private Catalogue catalogue;
-
-
-    @Column(name = "bracnhId")
+    @Column(name = "branchId", nullable = false)
     private Long branchId;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "branchId", referencedColumnName = "id", insertable = false, updatable = false)
     private Branch branch;
+
+    @Column(name = "catalogueId", nullable = false)
+    private Long catalogueId;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "catalogueId", referencedColumnName = "id", insertable = false, updatable = false)
+    private Catalogue catalogue;
+
 
 }

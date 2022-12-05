@@ -16,6 +16,7 @@ public class CreateBranchDto {
     public Branch toEntity() {
         return Branch.builder()
                 .name(name)
+                .userId(userId)
                 .build();
     }
 }

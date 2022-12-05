@@ -1,13 +1,12 @@
 package com.school.project.schooldbproject.order.repository;
 
 import com.school.project.schooldbproject.order.entity.OrderDetail;
-import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Repository
+//@Repository
 public class OrderDetailMemoryRepositoryImpl implements OrderDetailRepository {
     private static final Map<Long, OrderDetail> memoryDataSource = new HashMap<>();
     private static Long sequence = 0L;

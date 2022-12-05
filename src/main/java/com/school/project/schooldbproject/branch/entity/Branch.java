@@ -1,5 +1,6 @@
 package com.school.project.schooldbproject.branch.entity;
 
+import com.school.project.schooldbproject.order.entity.Payment;
 import com.school.project.schooldbproject.user.entity.User;
 import lombok.*;
 
@@ -15,7 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 public class Branch {
     @Id
-    @Column(name = "branchId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -24,7 +24,13 @@ public class Branch {
     @OneToMany
     private List<Inventory> inventories;
 
-    @OneToOne
-    @JoinColumn(name = "userId")
+    @OneToMany
+    private List<Payment> payments;
+
+    @Column(name = "userId", nullable = false)
+    private Long userId;
+
+    @OneToOne(optional = false)
+    @JoinColumn(name = "userId", referencedColumnName = "id", insertable = false, updatable = false)
     private User owner;
 }

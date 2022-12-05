@@ -1,9 +1,11 @@
 package com.school.project.schooldbproject.order.entity;
 
+import com.school.project.schooldbproject.branch.entity.Branch;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,7 +23,14 @@ public class Payment {
 
     private Date createdAt;
 
-    /**
-     * FK Branch Many to one
-     * */
+    @Column(name = "branchId", nullable = false)
+    private Long branchId;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "branchId", referencedColumnName = "id", insertable = false, updatable = false)
+    private Branch branch;
+
+    @OneToMany
+    private List<OrderDetail> orderDetails;
+
 }

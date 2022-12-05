@@ -2,10 +2,12 @@ package com.school.project.schooldbproject.order.repository;
 
 import com.school.project.schooldbproject.order.entity.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.Optional;
 
+@Repository
 public class PaymentJpaRepositoryImpl implements PaymentRepository {
     private final EntityManager em;
 

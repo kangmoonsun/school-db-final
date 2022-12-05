@@ -7,7 +7,10 @@ import com.school.project.schooldbproject.global.error.exception.EntityNotFoundE
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 
+
+@Transactional
 @Service
 public class BranchServiceImpl implements BranchService {
 
@@ -24,11 +27,10 @@ public class BranchServiceImpl implements BranchService {
         return branchRepository.save(branch);
     }
 
-    @Override
-    public Branch findBranchByName(String name) {
-        Branch branch = branchRepository.findByName(name)
-                .orElseThrow(() -> new EntityNotFoundException("브랜치 이름으로 조회 실패. 이름: " + name));
 
-        return branch;
+    @Override
+    public Branch findBranchById(Long id) {
+        return branchRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("브랜치 ID로 조회 실패. ID: " + id));
     }
 }

@@ -12,6 +12,7 @@ public class CreateOrderDetailDto {
 
     public OrderDetail toEntity() {
         return OrderDetail.builder()
+//                .paymentId()
                 .catalogueId(catalogueId)
                 .quantity(quantity)
                 .build();

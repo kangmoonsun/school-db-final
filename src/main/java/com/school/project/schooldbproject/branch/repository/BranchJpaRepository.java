@@ -24,16 +24,25 @@ public class BranchJpaRepository implements BranchRepository {
 
     @Override
     public Optional<Branch> findById(Long id) {
-        return Optional.empty();
+        return Optional.ofNullable(em.find(Branch.class, id));
     }
 
     @Override
     public Optional<Branch> findByName(String name) {
-        return Optional.empty();
+        return Optional.ofNullable(
+                em.createQuery("select branch from Branch branch where branch.name = :name", Branch.class)
+                        .setParameter("name", name)
+                        .getSingleResult()
+        );
     }
 
     @Override
     public Optional<Branch> findByUserId(Long id) {
-        return Optional.empty();
+        return Optional.ofNullable(
+                em.createQuery("select branch from Branch branch where branch.userId = :userId", Branch.class)
+                        .setParameter("userId", id)
+                        .getSingleResult()
+        );
     }
+
 }

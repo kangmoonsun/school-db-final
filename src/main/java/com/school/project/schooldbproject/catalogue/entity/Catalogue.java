@@ -15,7 +15,6 @@ import java.util.List;
 @Table(name = "catalogues")
 public class Catalogue {
     @Id
-    @Column(name = "catalogueId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

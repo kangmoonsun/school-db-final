@@ -20,10 +20,20 @@ public class CreateUserDto {
     @NotNull
     private String password;
 
+    /**
+     * Todo: change to enum
+     */
+    @NotNull
+    private String role;
+
 
     public User toEntity() {
         return User.builder()
                 .name(name)
+                .email(email)
+                .password(password)
+                .role(role)
                 .build();
     }
+
 }

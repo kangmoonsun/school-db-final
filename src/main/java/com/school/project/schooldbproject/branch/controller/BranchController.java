@@ -7,15 +7,11 @@ import com.school.project.schooldbproject.branch.entity.Inventory;
 import com.school.project.schooldbproject.branch.service.BranchService;
 import com.school.project.schooldbproject.branch.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class BranchController {
     private final BranchService branchService;
-
     private final InventoryService inventoryService;
 
     @Autowired
@@ -30,7 +26,6 @@ public class BranchController {
         return inventoryService.createInventoryItem(createInventoryDto);
     }
 
-
     /**
      * Todo: 새로운 매장 생성 API
      */
@@ -41,4 +36,9 @@ public class BranchController {
     }
 
 
+    @GetMapping("branch/{id}")
+    @ResponseBody
+    Branch findBranchById(@PathVariable(name = "id") String branchId) {
+        return branchService.findBranchById(Long.valueOf(branchId));
+    }
 }

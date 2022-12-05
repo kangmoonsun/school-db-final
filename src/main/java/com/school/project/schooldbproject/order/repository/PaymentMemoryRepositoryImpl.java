@@ -1,11 +1,10 @@
 package com.school.project.schooldbproject.order.repository;
 
 import com.school.project.schooldbproject.order.entity.Payment;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
+//@Repository
 public class PaymentMemoryRepositoryImpl implements PaymentRepository {
     @Override
     public Payment save(Payment catalogue) {

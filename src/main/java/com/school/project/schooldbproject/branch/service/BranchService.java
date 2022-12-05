@@ -6,5 +6,5 @@ import com.school.project.schooldbproject.branch.entity.Branch;
 public interface BranchService {
     Branch createBranch(CreateBranchDto createBranchDto);
 
-    Branch findBranchByName(final String name);
+    Branch findBranchById(final Long id);
 }

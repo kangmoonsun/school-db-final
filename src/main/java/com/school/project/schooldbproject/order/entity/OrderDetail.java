@@ -1,5 +1,6 @@
 package com.school.project.schooldbproject.order.entity;
 
+import com.school.project.schooldbproject.catalogue.entity.Catalogue;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,14 +21,17 @@ public class OrderDetail {
 
     private Long totalPrice;
 
+    @Column(name = "paymentId", nullable = false)
+    private Long paymentId;
 
-    /**
-     * FK Payment Many to one
-     * */
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "paymentId", referencedColumnName = "id", insertable = false, updatable = false)
+    private Payment payment;
 
-
-    /**
-     * FK Catalogue Many to one
-     */
+    @Column(name = "catalogueId", nullable = false)
     private Long catalogueId;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "catalogueId", referencedColumnName = "id", insertable = false, updatable = false)
+    private Catalogue catalogue;
 }
