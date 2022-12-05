@@ -22,7 +22,6 @@ public class BranchServiceImpl implements BranchService {
     public Branch createBranch(CreateBranchDto createBranchDto) {
         Branch branch = createBranchDto.toEntity();
         return branchRepository.save(branch);
-
     }
 
     @Override

@@ -1,12 +1,16 @@
 package com.school.project.schooldbproject.order.entity;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "order_details")
 @Getter
+@Setter
+@Builder
 public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +20,7 @@ public class OrderDetail {
 
     private Long totalPrice;
 
+
     /**
      * FK Payment Many to one
      * */
@@ -23,5 +28,6 @@ public class OrderDetail {
 
     /**
      * FK Catalogue Many to one
-     * */
+     */
+    private Long catalogueId;
 }
