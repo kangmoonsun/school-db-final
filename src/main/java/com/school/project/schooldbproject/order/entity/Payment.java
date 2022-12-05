@@ -1,12 +1,16 @@
 package com.school.project.schooldbproject.order.entity;
 
-import lombok.Builder;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Getter
+@Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "payments")
 public class Payment {
     @Id

@@ -4,13 +4,13 @@ import lombok.*;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name = "branches")
 @Getter
 @Setter
 @Builder
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "branches")
 public class Branch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
