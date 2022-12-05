@@ -10,6 +10,9 @@ public class CreateBranchDto {
     @NotNull
     private String name;
 
+    @NotNull
+    private Long userId;
+
     public Branch toEntity() {
         return Branch.builder()
                 .name(name)

@@ -25,4 +25,12 @@ public class UserMemoryRepositoryImpl implements UserRepository {
         User foundUser = memoryDataSource.get(id);
         return Optional.ofNullable(foundUser);
     }
+
+    public Optional<User> findOneByEmail(String email) {
+        return memoryDataSource.values()
+                .stream()
+                .filter((user -> user.getName().equals(email)))
+                .findAny();
+    }
+
 }

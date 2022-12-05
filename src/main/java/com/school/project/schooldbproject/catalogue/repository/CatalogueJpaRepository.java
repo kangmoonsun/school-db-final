@@ -23,7 +23,6 @@ public class CatalogueJpaRepository implements CatalogueRepository {
     @Override
     public Optional<Catalogue> findById(Long id) {
         return Optional.ofNullable(em.find(Catalogue.class, id));
-
     }
 
     @Override

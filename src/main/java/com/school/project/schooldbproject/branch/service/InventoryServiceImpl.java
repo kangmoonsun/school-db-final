@@ -15,7 +15,6 @@ public class InventoryServiceImpl implements InventoryService {
         this.inventoryRepository = inventoryRepository;
     }
 
-
     @Override
     public Inventory createInventory(CreateInventoryDto createInventoryDto) {
         return null;

@@ -10,4 +10,6 @@ public interface BranchRepository {
     Optional<Branch> findById(Long id);
 
     Optional<Branch> findByName(String name);
+
+    Optional<Branch> findByUserId(Long id);
 }

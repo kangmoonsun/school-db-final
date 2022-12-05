@@ -1,5 +1,6 @@
 package com.school.project.schooldbproject.user.entity;
 
+import com.school.project.schooldbproject.branch.entity.Branch;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,10 +14,16 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
     @Id
+    @Column(name = "userId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    private String address;
+    private String email;
+
+    private String password;
+
+    @OneToOne
+    private Branch branch;
 }

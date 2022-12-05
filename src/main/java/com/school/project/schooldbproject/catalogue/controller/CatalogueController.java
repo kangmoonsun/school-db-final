@@ -23,11 +23,10 @@ public class CatalogueController {
         return catalogueService.createCatalogue(createCatalogueDto);
     }
 
+    // http://www.myserver.com/api/v1/catalogue?product-name=소라빵
     @GetMapping("catalogue")
     @ResponseBody
-    public Catalogue findByCatalogueName(@Valid @RequestParam(name = "name") String name) {
+    public Catalogue findByCatalogueName(@Valid @RequestParam(name = "product-name") String name) {
         return catalogueService.findCatalogueByName(name);
     }
-
-
 }

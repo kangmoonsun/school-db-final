@@ -15,12 +15,15 @@ public class CreateUserDto {
     private String name;
 
     @NotNull
-    private String address;
+    private String email;
+
+    @NotNull
+    private String password;
+
 
     public User toEntity() {
         return User.builder()
                 .name(name)
-                .address(address)
                 .build();
     }
 }

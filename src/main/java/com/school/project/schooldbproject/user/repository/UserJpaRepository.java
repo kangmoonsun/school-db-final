@@ -30,4 +30,12 @@ public class UserJpaRepository implements UserRepository {
         User foundUser = em.find(User.class, id);
         return Optional.ofNullable(foundUser);
     }
+
+    @Override
+    public Optional<User> findOneByEmail(String email) {
+        return Optional.ofNullable(
+                em.createQuery("select user from User user where user.email = :email", User.class)
+                        .setParameter("email", email)
+                        .getSingleResult());
+    }
 }

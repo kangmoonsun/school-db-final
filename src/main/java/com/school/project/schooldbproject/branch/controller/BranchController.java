@@ -18,6 +18,9 @@ public class BranchController {
         this.branchService = branchService;
     }
 
+    /**
+     * Todo: 새로운 매장 생성 API
+     */
     @PostMapping("branch")
     @ResponseBody
     Branch createBranch(@RequestBody CreateBranchDto createBranchDto) {

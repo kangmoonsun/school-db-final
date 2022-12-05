@@ -8,4 +8,6 @@ public interface UserRepository {
     User save(User user);
 
     Optional<User> findOneById(Long id);
+
+    Optional<User> findOneByEmail(String email);
 }

@@ -25,11 +25,13 @@ public class CatalogueServiceImpl implements CatalogueService {
 
     @Override
     public Catalogue findCatalogueById(Long id) {
-        return catalogueRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("카탈로그 ID로 조회 실패. 이름: " + id));
+        return catalogueRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("카탈로그 ID로 조회 실패. 이름: " + id));
     }
 
     @Override
     public Catalogue findCatalogueByName(String name) {
-        return catalogueRepository.findByName(name).orElseThrow(() -> new EntityNotFoundException("카탈로그 이름으로 조회 실패. 이름: " + name));
+        return catalogueRepository.findByName(name)
+                .orElseThrow(() -> new EntityNotFoundException("카탈로그 이름으로 조회 실패. 이름: " + name));
     }
 }

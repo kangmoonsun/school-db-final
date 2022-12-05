@@ -31,4 +31,9 @@ public class BranchMemoryRepository implements BranchRepository {
                 .filter((branch -> branch.getName().equals(name)))
                 .findAny();
     }
+
+    @Override
+    public Optional<Branch> findByUserId(Long id) {
+        return Optional.empty();
+    }
 }
