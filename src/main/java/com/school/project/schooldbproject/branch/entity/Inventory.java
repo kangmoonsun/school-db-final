@@ -23,8 +23,16 @@ public class Inventory {
 
     private Date createdAt;
 
+    @Column(name = "catalogueId")
+    private Long catalogueId;
+
     @ManyToOne
+    @JoinColumn(name = "catalogueId")
     private Catalogue catalogue;
+
+
+    @Column(name = "bracnhId")
+    private Long branchId;
 
     @ManyToOne
     private Branch branch;

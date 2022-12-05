@@ -4,5 +4,5 @@ import com.school.project.schooldbproject.branch.dto.CreateInventoryDto;
 import com.school.project.schooldbproject.branch.entity.Inventory;
 
 public interface InventoryService {
-    Inventory createInventory(CreateInventoryDto createInventoryDto);
+    Inventory createInventoryItem(CreateInventoryDto createInventoryDto);
 }

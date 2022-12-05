@@ -25,4 +25,5 @@ public class Catalogue {
 
     @OneToMany
     private List<Inventory> inventories;
+
 }

@@ -31,7 +31,6 @@ public class UserServiceImpl implements UserService {
         User foundUser = userRepository.findOneByEmail(loginDto.getEmail())
                 .orElseThrow(() -> new EntityNotFoundException("사용자를 찾을 수 없습니다. 이메일: " + loginDto.getEmail()));
 
-
         boolean isCorrect = foundUser.getPassword().equals(loginDto.getPassword());
         if (!isCorrect) {
             throw new EntityNotFoundException("사용자를 찾을 수 없습니다.");

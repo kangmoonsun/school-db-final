@@ -1,13 +1,12 @@
 package com.school.project.schooldbproject.branch.repository;
 
 import com.school.project.schooldbproject.branch.entity.Branch;
-import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Repository
+//@Repository
 public class BranchMemoryRepository implements BranchRepository {
     private static final Map<Long, Branch> memoryDataSource = new HashMap<>();
     private static Long sequence = 0L;

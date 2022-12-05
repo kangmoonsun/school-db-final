@@ -2,10 +2,12 @@ package com.school.project.schooldbproject.catalogue.repository;
 
 import com.school.project.schooldbproject.catalogue.entity.Catalogue;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.Optional;
 
+@Repository
 public class CatalogueJpaRepository implements CatalogueRepository {
     private final EntityManager em;
 

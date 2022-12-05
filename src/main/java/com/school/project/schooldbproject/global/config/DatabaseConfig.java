@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 @Configuration
 public class DatabaseConfig {
 
+    //    @PersistenceContext
     private final EntityManager em;
 
     @Autowired
