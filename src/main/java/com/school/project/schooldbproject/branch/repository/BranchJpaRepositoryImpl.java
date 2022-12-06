@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.Optional;
 
+@Transactional
 @Repository
 public class BranchJpaRepositoryImpl implements BranchRepository {
     private final EntityManager em;

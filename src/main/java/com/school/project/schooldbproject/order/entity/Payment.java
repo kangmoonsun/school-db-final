@@ -37,4 +37,31 @@ public class Payment {
     @JsonManagedReference
     @OneToMany(mappedBy = "payment", fetch = FetchType.LAZY)
     private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
+
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
+        branch.getPayments().add(this);
+    }
+
+    public void addOrderDetail(OrderDetail orderDetail) {
+        orderDetails.add(orderDetail);
+        orderDetail.setPayment(this);
+    }
+
+    public static Payment createPayment(Branch branch, List<OrderDetail> orderDetails) {
+        Payment payment = new Payment();
+
+        payment.setBranch(branch);
+        orderDetails.forEach(payment::addOrderDetail);
+        payment.setCreatedAt(new Date());
+
+        return payment;
+    }
+
+    public Long getTotalPrice() {
+        return orderDetails.stream().mapToLong(OrderDetail::getTotalPrice).sum();
+    }
+
+
 }

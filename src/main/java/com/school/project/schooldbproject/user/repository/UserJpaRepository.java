@@ -6,9 +6,11 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Primary
+@Transactional
 @Repository
 public class UserJpaRepository implements UserRepository {
 

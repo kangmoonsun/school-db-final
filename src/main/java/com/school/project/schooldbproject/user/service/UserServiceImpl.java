@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
 
         return LoginSuccessResponse.builder()
                 .branchId(branch.getId())
+                .isLogin(true)
                 .build();
     }
 

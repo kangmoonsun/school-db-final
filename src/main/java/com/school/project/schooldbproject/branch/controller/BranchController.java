@@ -9,6 +9,8 @@ import com.school.project.schooldbproject.branch.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class BranchController {
     private final BranchService branchService;
@@ -24,6 +26,15 @@ public class BranchController {
     @ResponseBody
     Inventory createInventory(@RequestBody CreateInventoryDto createInventoryDto) {
         return inventoryService.createInventoryItem(createInventoryDto);
+    }
+
+    /**
+     * 매장 ID로 재고 불러오는 API
+     */
+    @GetMapping("branch/{id}/inventories")
+    @ResponseBody
+    List<Inventory> getInventories(@PathVariable(name = "id") String branchId) {
+        return inventoryService.findByBranchId(Long.valueOf(branchId));
     }
 
     /**

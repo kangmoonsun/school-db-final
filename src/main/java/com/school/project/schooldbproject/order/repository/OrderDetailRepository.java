@@ -8,4 +8,6 @@ public interface OrderDetailRepository {
     OrderDetail save(OrderDetail catalogue);
 
     Optional<OrderDetail> findById(Long id);
+
+//    Optional<List<OrderDetail>> findByIds(List<CreateOrderDetailDto> createOrderDetailDtos);
 }

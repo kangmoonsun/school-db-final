@@ -3,6 +3,7 @@ package com.school.project.schooldbproject.branch.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.school.project.schooldbproject.catalogue.entity.Catalogue;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,8 +21,9 @@ public class Inventory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long quantity;
+    private Long stock;
 
+    @CreatedDate
     private Date createdAt;
 
     @JsonBackReference
@@ -30,7 +32,16 @@ public class Inventory {
     private Branch branch;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "catalogue_id")
     private Catalogue catalogue;
+
+    public void addStock(Long quantity) {
+        stock += quantity;
+    }
+
+    public void removeStock(Long quantity) {
+        stock -= quantity;
+    }
+
 }

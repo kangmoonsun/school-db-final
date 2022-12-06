@@ -26,6 +26,6 @@ public class Catalogue {
     private Long price;
 
     @JsonManagedReference
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Inventory> inventories = new ArrayList<Inventory>();
 }

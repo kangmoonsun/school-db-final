@@ -6,5 +6,6 @@ import lombok.Getter;
 @Builder
 @Getter
 public class LoginSuccessResponse {
+    private boolean isLogin;
     private Long branchId;
 }

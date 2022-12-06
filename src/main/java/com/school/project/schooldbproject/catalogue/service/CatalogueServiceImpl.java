@@ -34,4 +34,6 @@ public class CatalogueServiceImpl implements CatalogueService {
         return catalogueRepository.findByName(name)
                 .orElseThrow(() -> new EntityNotFoundException("카탈로그 이름으로 조회 실패. 이름: " + name));
     }
+
+
 }
