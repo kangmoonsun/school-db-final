@@ -38,4 +38,9 @@ public class Branch {
     @JoinColumn(name = "user_id")
     private User owner;
 
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+        owner.setBranch(this);
+    }
 }

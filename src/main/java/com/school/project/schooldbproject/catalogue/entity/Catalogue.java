@@ -1,12 +1,8 @@
 package com.school.project.schooldbproject.catalogue.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.school.project.schooldbproject.branch.entity.Inventory;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -14,6 +10,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Table(name = "catalogues")
 public class Catalogue {
     @Id
@@ -25,7 +22,6 @@ public class Catalogue {
 
     private Long price;
 
-    @JsonManagedReference
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Inventory> inventories = new ArrayList<Inventory>();
+//    @JsonManagedReference
+//    private List<Inventory> inventories = new ArrayList<Inventory>();
 }

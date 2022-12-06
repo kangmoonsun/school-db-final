@@ -21,6 +21,12 @@ public class CreateUserDto {
     private String password;
 
     /**
+     * Todo: add branch
+     */
+    @NotNull
+    private String branchName;
+
+    /**
      * Todo: change to enum
      */
     @NotNull

@@ -1,7 +1,10 @@
 package com.school.project.schooldbproject.user.service;
 
 import com.school.project.schooldbproject.branch.entity.Branch;
+import com.school.project.schooldbproject.branch.repository.BranchRepository;
+import com.school.project.schooldbproject.global.error.exception.BusinessException;
 import com.school.project.schooldbproject.global.error.exception.EntityNotFoundException;
+import com.school.project.schooldbproject.global.error.exception.ErrorCode;
 import com.school.project.schooldbproject.user.dto.CreateUserDto;
 import com.school.project.schooldbproject.user.dto.LoginDto;
 import com.school.project.schooldbproject.user.dto.LoginSuccessResponse;
@@ -17,10 +20,12 @@ import java.util.Optional;
 @Transactional
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final BranchRepository branchRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, BranchRepository branchRepository) {
         this.userRepository = userRepository;
+        this.branchRepository = branchRepository;
     }
 
 
@@ -45,8 +50,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(CreateUserDto createUserDto) {
+        boolean userExist = userRepository.findOneByEmail(createUserDto.getEmail()).isPresent();
+        if (userExist) {
+            throw new BusinessException("이미 가입된 회원입니다.", ErrorCode.INVALID_INPUT_VALUE);
+        }
+
         User user = createUserDto.toEntity();
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        Branch branch = new Branch();
+        branch.setName(createUserDto.getBranchName());
+        branch.setOwner(savedUser);
+        branchRepository.save(branch);
+
+        return savedUser;
     }
 
     @Override

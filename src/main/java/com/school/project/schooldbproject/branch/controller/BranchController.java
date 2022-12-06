@@ -2,6 +2,7 @@ package com.school.project.schooldbproject.branch.controller;
 
 import com.school.project.schooldbproject.branch.dto.CreateBranchDto;
 import com.school.project.schooldbproject.branch.dto.CreateInventoryDto;
+import com.school.project.schooldbproject.branch.dto.FetchedInventoryDto;
 import com.school.project.schooldbproject.branch.entity.Branch;
 import com.school.project.schooldbproject.branch.entity.Inventory;
 import com.school.project.schooldbproject.branch.service.BranchService;
@@ -33,7 +34,7 @@ public class BranchController {
      */
     @GetMapping("branch/{id}/inventories")
     @ResponseBody
-    List<Inventory> getInventories(@PathVariable(name = "id") String branchId) {
+    List<FetchedInventoryDto> getStocks(@PathVariable(name = "id") String branchId) {
         return inventoryService.findByBranchId(Long.valueOf(branchId));
     }
 

@@ -25,6 +25,7 @@ public class InventoryJpaRepository implements InventoryRepository {
         return inventory;
     }
 
+
     @Override
     public void updateInventories(List<Inventory> inventories) {
         inventories.forEach(em::persist);

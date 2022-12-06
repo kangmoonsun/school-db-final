@@ -32,7 +32,7 @@ public class Inventory {
     private Branch branch;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "catalogue_id")
     private Catalogue catalogue;
 
