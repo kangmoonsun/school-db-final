@@ -1,7 +1,5 @@
 package com.school.project.schooldbproject.order.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.school.project.schooldbproject.branch.entity.Branch;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -29,12 +27,12 @@ public class Payment {
     @CreatedDate
     private Date createdAt;
 
-    @JsonBackReference
+    //    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "branch_id")
     private Branch branch;
 
-    @JsonManagedReference
+    //    @JsonManagedReference
     @OneToMany(mappedBy = "payment", fetch = FetchType.LAZY)
     private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 
@@ -53,10 +51,10 @@ public class Payment {
         Payment payment = new Payment();
 
         payment.setBranch(branch);
-        for (OrderDetail orderDetail : orderDetails) {
+        orderDetails.forEach(orderDetail -> {
             payment.addOrderDetail(orderDetail);
             orderDetail.setPayment(payment);
-        }
+        });
         payment.setCreatedAt(new Date());
         payment.setTotalPrice(payment.getTotalPrice());
 

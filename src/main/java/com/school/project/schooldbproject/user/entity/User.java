@@ -1,6 +1,5 @@
 package com.school.project.schooldbproject.user.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.school.project.schooldbproject.branch.entity.Branch;
 import lombok.*;
 
@@ -27,7 +26,7 @@ public class User {
 
     private String role;
 
-    @JsonManagedReference
+    //    @JsonManagedReference
     @OneToOne(mappedBy = "owner")
     private Branch branch;
 }

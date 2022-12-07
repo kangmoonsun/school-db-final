@@ -1,12 +1,12 @@
 package com.school.project.schooldbproject.order.service;
 
 import com.school.project.schooldbproject.order.dto.CreatePaymentDto;
-import com.school.project.schooldbproject.order.entity.Payment;
+import com.school.project.schooldbproject.order.dto.PaymentDto;
 
 import java.util.List;
 
 public interface PaymentService {
-    Payment createPayment(CreatePaymentDto createPaymentDto);
+    PaymentDto.Response createPayment(CreatePaymentDto createPaymentDto);
 
-    List<Payment> findPaymentsByBranchId(Long branchId);
+    List<PaymentDto.Response> findPaymentsByBranchId(Long branchId);
 }

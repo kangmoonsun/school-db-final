@@ -1,7 +1,7 @@
 package com.school.project.schooldbproject.order.controller;
 
 import com.school.project.schooldbproject.order.dto.CreatePaymentDto;
-import com.school.project.schooldbproject.order.entity.Payment;
+import com.school.project.schooldbproject.order.dto.PaymentDto;
 import com.school.project.schooldbproject.order.service.OrderDetailService;
 import com.school.project.schooldbproject.order.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +23,13 @@ public class OrderController {
 
     @PostMapping("payment")
     @ResponseBody
-    public Payment createPayment(@Valid @RequestBody CreatePaymentDto createPaymentDto) {
+    public PaymentDto.Response createPayment(@Valid @RequestBody CreatePaymentDto createPaymentDto) {
         return this.paymentService.createPayment(createPaymentDto);
     }
 
     @GetMapping("branch/{id}/payments")
     @ResponseBody
-    public List<Payment> findPaymentsByBranchId(@PathVariable(name = "id") String branchId) {
+    public List<PaymentDto.Response> findPaymentsByBranchId(@PathVariable(name = "id") String branchId) {
         return this.paymentService.findPaymentsByBranchId(Long.valueOf(branchId));
     }
 }

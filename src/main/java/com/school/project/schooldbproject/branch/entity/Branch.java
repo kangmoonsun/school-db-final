@@ -1,7 +1,5 @@
 package com.school.project.schooldbproject.branch.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.school.project.schooldbproject.order.entity.Payment;
 import com.school.project.schooldbproject.user.entity.User;
 import lombok.*;
@@ -25,15 +23,15 @@ public class Branch {
 
     private String name;
 
-    @JsonManagedReference
+    //    @JsonManagedReference
     @OneToMany(mappedBy = "branch", fetch = FetchType.LAZY)
     private List<Inventory> inventories = new ArrayList<Inventory>();
 
-    @JsonManagedReference
+    //    @JsonManagedReference
     @OneToMany(mappedBy = "branch", fetch = FetchType.LAZY)
     private List<Payment> payments = new ArrayList<Payment>();
 
-    @JsonBackReference
+    //    @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User owner;

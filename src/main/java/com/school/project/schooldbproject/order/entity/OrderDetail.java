@@ -1,6 +1,5 @@
 package com.school.project.schooldbproject.order.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.school.project.schooldbproject.branch.entity.Inventory;
 import com.school.project.schooldbproject.catalogue.entity.Catalogue;
 import lombok.*;
@@ -24,13 +23,13 @@ public class OrderDetail {
 
     private Long totalPrice;
 
-    @JsonBackReference
+    //    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_id")
     private Payment payment;
 
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    //    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "catalogue_id")
     private Catalogue catalogue;
 

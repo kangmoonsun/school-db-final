@@ -1,6 +1,5 @@
 package com.school.project.schooldbproject.branch.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.school.project.schooldbproject.catalogue.entity.Catalogue;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -26,12 +25,12 @@ public class Inventory {
     @CreatedDate
     private Date createdAt;
 
-    @JsonBackReference
+    //    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "branch_id")
     private Branch branch;
 
-    @JsonBackReference
+    //    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "catalogue_id")
     private Catalogue catalogue;

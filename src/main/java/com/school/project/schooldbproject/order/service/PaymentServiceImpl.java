@@ -9,6 +9,7 @@ import com.school.project.schooldbproject.global.error.exception.EntityNotFoundE
 import com.school.project.schooldbproject.global.error.exception.ErrorCode;
 import com.school.project.schooldbproject.order.dto.CreateOrderDetailDto;
 import com.school.project.schooldbproject.order.dto.CreatePaymentDto;
+import com.school.project.schooldbproject.order.dto.PaymentDto;
 import com.school.project.schooldbproject.order.entity.OrderDetail;
 import com.school.project.schooldbproject.order.entity.Payment;
 import com.school.project.schooldbproject.order.repository.OrderDetailRepository;
@@ -40,7 +41,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Transactional
     @Override
-    public Payment createPayment(CreatePaymentDto createPaymentDto) {
+    public PaymentDto.Response createPayment(CreatePaymentDto createPaymentDto) {
         List<Inventory> inventories = inventoryRepository.findByBranchId(createPaymentDto.getBranchId())
                 .orElseThrow(() -> new EntityNotFoundException("해당 브랜치 ID로 재고를 찾을 수 없습니다"));
 
@@ -75,12 +76,15 @@ public class PaymentServiceImpl implements PaymentService {
         inventoryRepository.updateInventories(willUpdateInventories);
         paymentRepository.save(payment);
 
-        return payment;
+        return new PaymentDto.Response(payment);
     }
 
     @Override
-    public List<Payment> findPaymentsByBranchId(Long branchId) {
-        return paymentRepository.findAllByBranchId(branchId)
+    public List<PaymentDto.Response> findPaymentsByBranchId(Long branchId) {
+        List<Payment> payments = paymentRepository.findAllByBranchId(branchId)
                 .orElseThrow(() -> new EntityNotFoundException("브랜치 ID로 결제 내역을 찾을 수 없습니다. 요청한 브랜치 ID: " + branchId));
+
+        return payments.stream().map(PaymentDto.Response::new).collect(Collectors.toList());
+
     }
 }
