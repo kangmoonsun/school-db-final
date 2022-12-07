@@ -20,9 +20,6 @@ public class CreateUserDto {
     @NotNull
     private String password;
 
-    /**
-     * Todo: add branch
-     */
     @NotNull
     private String branchName;
 
