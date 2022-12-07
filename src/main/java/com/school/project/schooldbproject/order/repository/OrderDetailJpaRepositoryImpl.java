@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-import java.util.Optional;
 
 @Transactional
 @Repository
@@ -21,19 +20,8 @@ public class OrderDetailJpaRepositoryImpl implements OrderDetailRepository {
 
 
     @Override
-    public OrderDetail save(OrderDetail catalogue) {
-        return null;
+    public OrderDetail save(OrderDetail item) {
+        em.persist(item);
+        return item;
     }
-
-    @Override
-    public Optional<OrderDetail> findById(Long id) {
-        return Optional.empty();
-    }
-
-//    @Override
-//    public Optional<List<OrderDetail>> findByIds(List<CreateOrderDetailDto> createOrderDetailDtos) {
-//        em.createQuery("select items from OrderDetail items where items.", OrderDetail.class)
-//
-//        return Optional.empty();
-//    }
 }

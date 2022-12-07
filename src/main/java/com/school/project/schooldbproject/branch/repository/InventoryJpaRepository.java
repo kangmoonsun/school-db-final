@@ -25,10 +25,19 @@ public class InventoryJpaRepository implements InventoryRepository {
         return inventory;
     }
 
-
     @Override
     public void updateInventories(List<Inventory> inventories) {
         inventories.forEach(em::persist);
+    }
+
+    @Override
+    public Optional<Inventory> findByIds(Long branchId, Long catalogueId) {
+        return em.createQuery("select item from Inventory item where item.branch.id = :branchId and item.catalogue.id = :catalogueId", Inventory.class)
+                .setParameter("branchId", branchId)
+                .setParameter("catalogueId", catalogueId)
+                .getResultList()
+                .stream()
+                .findAny();
     }
 
     @Override
@@ -40,15 +49,7 @@ public class InventoryJpaRepository implements InventoryRepository {
 
         return Optional.ofNullable(inventories);
 
-//        List<Inventory> inventories = em.createQuery("select items from Inventory items where items.branch.id = :branchId", Inventory.class)
-//                .setParameter("branchId", branchId)
-//                .getResultList();
-//
-//        return Optional.ofNullable(inventories);
     }
 
-
-//        Branch branch = em.find(Branch.class, branchId);
-//        return Optional.ofNullable(branch.getInventories()); }
 
 }

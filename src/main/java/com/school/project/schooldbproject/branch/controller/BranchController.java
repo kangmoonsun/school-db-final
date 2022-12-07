@@ -25,7 +25,7 @@ public class BranchController {
 
     @PostMapping("inventory")
     @ResponseBody
-    Inventory createInventory(@RequestBody CreateInventoryDto createInventoryDto) {
+    Inventory addStock(@RequestBody CreateInventoryDto createInventoryDto) {
         return inventoryService.createInventoryItem(createInventoryDto);
     }
 

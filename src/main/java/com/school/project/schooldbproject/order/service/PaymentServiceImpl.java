@@ -47,9 +47,6 @@ public class PaymentServiceImpl implements PaymentService {
         List<CreateOrderDetailDto> orderDetailsDtos = createPaymentDto.getOrderDetails();
         List<OrderDetail> orderDetails = new ArrayList<>();
 
-        /**
-         * Todo: 재고 비교해서 요구 수량보다 적으면 예외 발생
-         * */
         List<Inventory> willUpdateInventories = orderDetailsDtos.stream()
                 .map(orderItemDto -> {
                     Long orderCatalogueId = orderItemDto.getCatalogueId();
@@ -65,7 +62,9 @@ public class PaymentServiceImpl implements PaymentService {
 
                     /** 여기서 foundInventoryItem 개수 상태 변경됨 */
                     OrderDetail orderItem = OrderDetail.createOrderItem(foundInventoryItem, orderQuantity);
+                    orderDetailRepository.save(orderItem);
                     orderDetails.add(orderItem);
+
                     return foundInventoryItem;
 
                 }).collect(Collectors.toList());
@@ -76,57 +75,12 @@ public class PaymentServiceImpl implements PaymentService {
         inventoryRepository.updateInventories(willUpdateInventories);
         paymentRepository.save(payment);
 
+        return payment;
+    }
 
-//        OrderDetail
-//        willUpdateInventories.stream().map(item -> {
-//            Catalogue catalogue = item.getCatalogue();
-//
-//        })
-//
-
-
-//        inventories.forEach(item -> {
-//            Long inventoryCatalogueId = item.getCatalogue().getId();
-//            orderDetailsDtos.stream().filter(orderItem -> orderItem.getCatalogueId().equals(inventoryCatalogueId)).findAny().orElseThrow(() -> new EntityNotFoundException("요청한 상품 ID로 재고를 찾을 수 없습니다. 상품 ID: " ))
-//        });
-//
-
-
-//        List<Long> catalogueIds = orderDetailsDtos
-//                .stream()
-//                .map(item -> item.getCatalogueId())
-//                .collect(Collectors.toList());
-
-        // 브랜치의 재고 목록
-
-        // 재고 목록에서 주문한 아이템들 가져옴
-//        inventories.containsAll()
-
-
-//        inventories.
-
-//        inventories.stream()
-//                .filter(item -> item.getCatalogue().getId())
-
-
-//        orderDetailsDtos.stream()
-//                .map(item -> item.createOrderItem())
-//        List<OrderDetail> orderItems = OrderDetail.builder()
-
-
-//        List<OrderDetail> orderItems = orderDetailsDtos.stream()
-//                .map(item -> item.createOrderItem(catalogues))
-//
-
-
-//        List<OrderDetail> orderDetails = orderDetailsDtos.stream()
-//                .map(dto -> dto.toEntity())
-//                .collect(Collectors.toList());
-
-//        createPaymentDto.setOrderDetails();
-
-
-//        return ;
-        return null;
+    @Override
+    public List<Payment> findPaymentsByBranchId(Long branchId) {
+        return paymentRepository.findAllByBranchId(branchId)
+                .orElseThrow(() -> new EntityNotFoundException("브랜치 ID로 결제 내역을 찾을 수 없습니다. 요청한 브랜치 ID: " + branchId));
     }
 }

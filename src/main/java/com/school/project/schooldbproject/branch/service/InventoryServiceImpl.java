@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Transactional
@@ -24,8 +25,18 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public Inventory createInventoryItem(CreateInventoryDto createInventoryDto) {
-        Inventory inventoryItem = createInventoryDto.toEntity();
-        return inventoryRepository.save(inventoryItem);
+        Optional<Inventory> inventoryOptional =
+                inventoryRepository.findByIds(createInventoryDto.getBranchId(), createInventoryDto.getCatalogueId());
+
+        if (inventoryOptional.isPresent()) {
+            Inventory stock = inventoryOptional.get();
+            stock.addStock(createInventoryDto.getQuantity());
+            return stock;
+        }
+
+
+        Inventory newStock = createInventoryDto.toEntity();
+        return inventoryRepository.save(newStock);
     }
 
     @Override

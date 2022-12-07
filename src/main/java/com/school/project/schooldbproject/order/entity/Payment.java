@@ -53,8 +53,12 @@ public class Payment {
         Payment payment = new Payment();
 
         payment.setBranch(branch);
-        orderDetails.forEach(payment::addOrderDetail);
+        for (OrderDetail orderDetail : orderDetails) {
+            payment.addOrderDetail(orderDetail);
+            orderDetail.setPayment(payment);
+        }
         payment.setCreatedAt(new Date());
+        payment.setTotalPrice(payment.getTotalPrice());
 
         return payment;
     }
