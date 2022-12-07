@@ -2,7 +2,6 @@ package com.school.project.schooldbproject.order.controller;
 
 import com.school.project.schooldbproject.order.dto.CreatePaymentDto;
 import com.school.project.schooldbproject.order.dto.PaymentDto;
-import com.school.project.schooldbproject.order.service.OrderDetailService;
 import com.school.project.schooldbproject.order.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +14,8 @@ public class OrderController {
 
     private final PaymentService paymentService;
 
-
     @Autowired
-    public OrderController(PaymentService paymentService, OrderDetailService orderDetailService) {
+    public OrderController(PaymentService paymentService) {
         this.paymentService = paymentService;
     }
 
@@ -33,3 +31,4 @@ public class OrderController {
         return this.paymentService.findPaymentsByBranchId(Long.valueOf(branchId));
     }
 }
+

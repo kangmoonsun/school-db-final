@@ -3,7 +3,6 @@ package com.school.project.schooldbproject.order.service;
 import com.school.project.schooldbproject.branch.entity.Branch;
 import com.school.project.schooldbproject.branch.entity.Inventory;
 import com.school.project.schooldbproject.branch.repository.InventoryRepository;
-import com.school.project.schooldbproject.catalogue.repository.CatalogueRepository;
 import com.school.project.schooldbproject.global.error.exception.BusinessException;
 import com.school.project.schooldbproject.global.error.exception.EntityNotFoundException;
 import com.school.project.schooldbproject.global.error.exception.ErrorCode;
@@ -25,14 +24,12 @@ import java.util.stream.Collectors;
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
-    private final CatalogueRepository catalogueRepository;
     private final InventoryRepository inventoryRepository;
     private final PaymentRepository paymentRepository;
     private final OrderDetailRepository orderDetailRepository;
 
     @Autowired
-    public PaymentServiceImpl(CatalogueRepository catalogueRepository, InventoryRepository inventoryRepository, PaymentRepository paymentRepository, OrderDetailRepository orderDetailRepository) {
-        this.catalogueRepository = catalogueRepository;
+    public PaymentServiceImpl(InventoryRepository inventoryRepository, PaymentRepository paymentRepository, OrderDetailRepository orderDetailRepository) {
         this.inventoryRepository = inventoryRepository;
         this.paymentRepository = paymentRepository;
         this.orderDetailRepository = orderDetailRepository;
@@ -85,6 +82,5 @@ public class PaymentServiceImpl implements PaymentService {
                 .orElseThrow(() -> new EntityNotFoundException("브랜치 ID로 결제 내역을 찾을 수 없습니다. 요청한 브랜치 ID: " + branchId));
 
         return payments.stream().map(PaymentDto.Response::new).collect(Collectors.toList());
-
     }
 }

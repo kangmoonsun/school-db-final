@@ -1,5 +1,6 @@
 package com.school.project.schooldbproject.order.entity;
 
+import com.school.project.schooldbproject.admin.dto.SalesDto;
 import com.school.project.schooldbproject.branch.entity.Branch;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -9,6 +10,28 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
+/**
+ * Todo: Remove after
+ */
+@SqlResultSetMapping(
+        name = "BranchesSalesMapping",
+        classes = @ConstructorResult(
+                targetClass = SalesDto.BranchSalesDto.class,
+                columns = {
+                        @ColumnResult(name = "name", type = String.class),
+                        @ColumnResult(name = "totalSales", type = Long.class),
+                })
+)
+@SqlResultSetMapping(
+        name = "CataloguesSalesMapping",
+        classes = @ConstructorResult(
+                targetClass = SalesDto.BranchSalesDto.class,
+                columns = {
+                        @ColumnResult(name = "name", type = String.class),
+                        @ColumnResult(name = "totalSales", type = Long.class),
+                })
+)
 @Entity
 @Getter
 @Setter
