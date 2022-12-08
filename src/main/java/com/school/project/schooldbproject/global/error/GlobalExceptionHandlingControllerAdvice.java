@@ -42,7 +42,7 @@ public class GlobalExceptionHandlingControllerAdvice {
         /** Todo: replace to log */
         e.printStackTrace();
         final ErrorCode errorCode = e.getErrorCode();
-        final ErrorResponse response = ErrorResponse.of(errorCode);
+        final ErrorResponse response = ErrorResponse.of(errorCode, e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.valueOf(errorCode.getStatus()));
     }
 

@@ -21,10 +21,6 @@ public class AdminRepository {
         this.em = em;
     }
 
-    /**
-     * Todo: 날짜 사이의 모든 브랜치 매출 통계
-     */
-
 
     public Optional<List<CatalogueSalesDto>> getCataloguesSales(Date begin, Date end) {
         String nativeQuery =

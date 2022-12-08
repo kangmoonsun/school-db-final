@@ -31,6 +31,11 @@ public class InventoryJpaRepository implements InventoryRepository {
     }
 
     @Override
+    public Optional<Inventory> findById(Long id) {
+        return Optional.ofNullable(em.find(Inventory.class, id));
+    }
+
+    @Override
     public Optional<Inventory> findByIds(Long branchId, Long catalogueId) {
         return em.createQuery("select item from Inventory item where item.branch.id = :branchId and item.catalogue.id = :catalogueId", Inventory.class)
                 .setParameter("branchId", branchId)

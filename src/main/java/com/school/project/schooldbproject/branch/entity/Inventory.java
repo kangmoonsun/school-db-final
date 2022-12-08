@@ -35,6 +35,7 @@ public class Inventory {
     @JoinColumn(name = "catalogue_id")
     private Catalogue catalogue;
 
+
     public void addStock(Long quantity) {
         stock += quantity;
     }

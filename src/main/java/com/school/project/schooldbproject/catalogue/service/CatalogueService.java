@@ -1,12 +1,11 @@
 package com.school.project.schooldbproject.catalogue.service;
 
-import com.school.project.schooldbproject.catalogue.dto.CreateCatalogueDto;
-import com.school.project.schooldbproject.catalogue.entity.Catalogue;
+import com.school.project.schooldbproject.catalogue.dto.CatalogueDto;
 
 public interface CatalogueService {
-    Catalogue createCatalogue(CreateCatalogueDto createCatalogueDto);
+    CatalogueDto.Response createCatalogue(CatalogueDto.CreateDto createCatalogueDto);
 
-    Catalogue findCatalogueById(Long id);
+    CatalogueDto.Response findCatalogueById(Long id);
 
-    Catalogue findCatalogueByName(String name);
+    CatalogueDto.Response findCatalogueByName(String name);
 }

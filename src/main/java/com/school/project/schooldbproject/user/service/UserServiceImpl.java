@@ -7,7 +7,7 @@ import com.school.project.schooldbproject.global.error.exception.EntityNotFoundE
 import com.school.project.schooldbproject.global.error.exception.ErrorCode;
 import com.school.project.schooldbproject.user.dto.CreateUserDto;
 import com.school.project.schooldbproject.user.dto.LoginDto;
-import com.school.project.schooldbproject.user.dto.LoginSuccessResponse;
+import com.school.project.schooldbproject.user.dto.UserDto;
 import com.school.project.schooldbproject.user.entity.User;
 import com.school.project.schooldbproject.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,6 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final BranchRepository branchRepository;
@@ -29,7 +28,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public LoginSuccessResponse login(LoginDto loginDto) {
+    public UserDto.Response login(LoginDto loginDto) {
         User foundUser = userRepository.findOneByEmail(loginDto.getEmail())
                 .orElseThrow(() -> new EntityNotFoundException("사용자를 찾을 수 없습니다. 이메일: " + loginDto.getEmail()));
 
@@ -41,15 +40,13 @@ public class UserServiceImpl implements UserService {
         Branch branch = Optional.ofNullable(foundUser.getBranch())
                 .orElseThrow(() -> new EntityNotFoundException("브랜치를 찾을 수 없습니다. 사용자 ID: " + foundUser.getId()));
 
-        return LoginSuccessResponse.builder()
-                .branchId(branch.getId())
-                .isLogin(true)
-                .build();
+        return new UserDto.Response(foundUser);
     }
 
 
     @Override
-    public User createUser(CreateUserDto createUserDto) {
+    @Transactional
+    public UserDto.Response createUser(CreateUserDto createUserDto) {
         boolean userExist = userRepository.findOneByEmail(createUserDto.getEmail()).isPresent();
         if (userExist) {
             throw new BusinessException("이미 가입된 회원입니다.", ErrorCode.INVALID_INPUT_VALUE);
@@ -62,7 +59,7 @@ public class UserServiceImpl implements UserService {
         branch.setOwner(savedUser);
         branchRepository.save(branch);
 
-        return savedUser;
+        return new UserDto.Response(savedUser);
     }
 
     @Override

@@ -22,6 +22,16 @@ public class CreateInventoryDto {
     @NotNull
     private Long quantity;
 
+    public Inventory createStock(Branch branch, Catalogue catalogue) {
+        return Inventory.builder()
+                .branch(branch)
+                .catalogue(catalogue)
+                .stock(quantity)
+                .createdAt(new Date())
+                .build();
+    }
+
+
     public Inventory toEntity() {
         Branch branch = new Branch();
         branch.setId(branchId);

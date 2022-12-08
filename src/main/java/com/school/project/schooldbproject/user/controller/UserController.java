@@ -2,8 +2,7 @@ package com.school.project.schooldbproject.user.controller;
 
 import com.school.project.schooldbproject.user.dto.CreateUserDto;
 import com.school.project.schooldbproject.user.dto.LoginDto;
-import com.school.project.schooldbproject.user.dto.LoginSuccessResponse;
-import com.school.project.schooldbproject.user.entity.User;
+import com.school.project.schooldbproject.user.dto.UserDto;
 import com.school.project.schooldbproject.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,13 +24,13 @@ public class UserController {
      */
     @PostMapping("user")
     @ResponseBody
-    public User createUser(@RequestBody CreateUserDto createUserDto) {
+    public UserDto.Response createUser(@RequestBody CreateUserDto createUserDto) {
         return userService.createUser(createUserDto);
     }
 
     @PostMapping("login")
     @ResponseBody
-    public LoginSuccessResponse login(@RequestBody LoginDto loginDto) {
+    public UserDto.Response login(@RequestBody LoginDto loginDto) {
         return userService.login(loginDto);
     }
 }

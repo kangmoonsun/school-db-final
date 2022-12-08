@@ -1,15 +1,15 @@
 package com.school.project.schooldbproject.branch.controller;
 
+import com.school.project.schooldbproject.branch.dto.BranchDto;
 import com.school.project.schooldbproject.branch.dto.CreateBranchDto;
 import com.school.project.schooldbproject.branch.dto.CreateInventoryDto;
-import com.school.project.schooldbproject.branch.dto.FetchedInventoryDto;
-import com.school.project.schooldbproject.branch.entity.Branch;
-import com.school.project.schooldbproject.branch.entity.Inventory;
+import com.school.project.schooldbproject.branch.dto.InventoryDto;
 import com.school.project.schooldbproject.branch.service.BranchService;
 import com.school.project.schooldbproject.branch.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,8 +25,8 @@ public class BranchController {
 
     @PostMapping("inventory")
     @ResponseBody
-    Inventory addStock(@RequestBody CreateInventoryDto createInventoryDto) {
-        return inventoryService.createInventoryItem(createInventoryDto);
+    InventoryDto.Response addStock(@Valid @RequestBody CreateInventoryDto createInventoryDto) {
+        return inventoryService.addStock(createInventoryDto);
     }
 
     /**
@@ -34,23 +34,23 @@ public class BranchController {
      */
     @GetMapping("branch/{id}/inventories")
     @ResponseBody
-    List<FetchedInventoryDto> getStocks(@PathVariable(name = "id") String branchId) {
+    List<InventoryDto.FetchedResult> getStocks(@PathVariable(name = "id") String branchId) {
         return inventoryService.findByBranchId(Long.valueOf(branchId));
     }
 
     /**
-     * Todo: 새로운 매장 생성 API
+     * 새로운 매장 생성 API
      */
     @PostMapping("branch")
     @ResponseBody
-    Branch createBranch(@RequestBody CreateBranchDto createBranchDto) {
+    BranchDto.Response createBranch(@Valid @RequestBody CreateBranchDto createBranchDto) {
         return branchService.createBranch(createBranchDto);
     }
 
 
     @GetMapping("branch/{id}")
     @ResponseBody
-    Branch findBranchById(@PathVariable(name = "id") String branchId) {
+    BranchDto.Response findBranchById(@PathVariable(name = "id") String branchId) {
         return branchService.findBranchById(Long.valueOf(branchId));
     }
 }

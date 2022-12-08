@@ -1,6 +1,6 @@
 package com.school.project.schooldbproject.order.dto;
 
-import com.school.project.schooldbproject.branch.entity.Branch;
+import com.school.project.schooldbproject.branch.dto.BranchDto;
 import com.school.project.schooldbproject.catalogue.entity.Catalogue;
 import com.school.project.schooldbproject.order.entity.OrderDetail;
 import com.school.project.schooldbproject.order.entity.Payment;
@@ -26,7 +26,7 @@ public class PaymentDto {
 
         private Date createdAt;
 
-        private BranchDto branch;
+        private BranchDto.Response branch;
 
         private List<OrderDetailDto> orderDetailDtos = new ArrayList<>();
 
@@ -34,7 +34,7 @@ public class PaymentDto {
             this.id = entity.getId();
             this.totalPrice = entity.getTotalPrice();
             this.createdAt = entity.getCreatedAt();
-            this.branch = new BranchDto(entity.getBranch());
+            this.branch = new BranchDto.Response(entity.getBranch());
             this.orderDetailDtos = entity.getOrderDetails()
                     .stream()
                     .map(OrderDetailDto::new)
@@ -60,16 +60,5 @@ public class PaymentDto {
         }
     }
 
-    @Getter
-    public static class BranchDto {
-        private Long id;
 
-        private String name;
-
-        public BranchDto(Branch entity) {
-            this.id = entity.getId();
-            this.name = entity.getName();
-        }
-
-    }
 }

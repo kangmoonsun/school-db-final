@@ -32,12 +32,11 @@ public class CatalogueJpaRepository implements CatalogueRepository {
 
     @Override
     public Optional<Catalogue> findByName(String name) {
-        return Optional.ofNullable(
-                em.createQuery("select catalogue from Catalogue catalogue where catalogue.name = :name", Catalogue.class)
-                        .setParameter("name", name)
-                        .getSingleResult()
-        );
-
+        return em.createQuery("select catalogue from Catalogue catalogue where catalogue.name = :name", Catalogue.class)
+                .setParameter("name", name)
+                .getResultList()
+                .stream()
+                .findAny();
     }
 
     @Override

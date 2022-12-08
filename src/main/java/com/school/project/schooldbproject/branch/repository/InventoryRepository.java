@@ -10,6 +10,8 @@ public interface InventoryRepository {
 
     void updateInventories(List<Inventory> inventories);
 
+    Optional<Inventory> findById(Long id);
+
     Optional<Inventory> findByIds(Long branchId, Long catalogueId);
 
     Optional<List<Inventory>> findByBranchId(Long branchId);

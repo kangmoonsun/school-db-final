@@ -1,13 +1,12 @@
 package com.school.project.schooldbproject.branch.service;
 
 import com.school.project.schooldbproject.branch.dto.CreateInventoryDto;
-import com.school.project.schooldbproject.branch.dto.FetchedInventoryDto;
-import com.school.project.schooldbproject.branch.entity.Inventory;
+import com.school.project.schooldbproject.branch.dto.InventoryDto;
 
 import java.util.List;
 
 public interface InventoryService {
-    Inventory createInventoryItem(CreateInventoryDto createInventoryDto);
+    InventoryDto.Response addStock(CreateInventoryDto createInventoryDto);
 
-    List<FetchedInventoryDto> findByBranchId(Long branchId);
+    List<InventoryDto.FetchedResult> findByBranchId(Long branchId);
 }
