@@ -14,6 +14,12 @@ public class DemoController {
         this.demoService = demoService;
     }
 
+    @GetMapping("/")
+    @ResponseBody
+    public String healthCheck() {
+        return "hello, pos!";
+    }
+
     @GetMapping("init")
     @ResponseBody
     public String createMockData() {
