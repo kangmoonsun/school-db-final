@@ -21,7 +21,4 @@ public class Catalogue {
     private String name;
 
     private Long price;
-
-//    @JsonManagedReference
-//    private List<Inventory> inventories = new ArrayList<Inventory>();
 }

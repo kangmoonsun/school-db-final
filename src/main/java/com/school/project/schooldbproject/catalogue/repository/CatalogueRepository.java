@@ -14,4 +14,6 @@ public interface CatalogueRepository {
 
     Optional<List<Catalogue>> findByIds(List<Long> ids);
 
+    Optional<List<Catalogue>> findAll();
+
 }

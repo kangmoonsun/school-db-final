@@ -9,6 +9,10 @@ import com.school.project.schooldbproject.global.error.exception.ErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 
 @Service
 public class CatalogueServiceImpl implements CatalogueService {
@@ -45,4 +49,16 @@ public class CatalogueServiceImpl implements CatalogueService {
 
         return new CatalogueDto.Response(catalogue);
     }
+
+    @Override
+    public List<Catalogue> findAll() {
+        Optional<List<Catalogue>> cataloguesOptional = catalogueRepository.findAll();
+        boolean present = cataloguesOptional.isPresent();
+        if (present) {
+            return cataloguesOptional.get();
+        }
+
+        return new ArrayList<>();
+    }
+
 }

@@ -48,4 +48,12 @@ public class CatalogueJpaRepository implements CatalogueRepository {
 
         return Optional.ofNullable(catalogues);
     }
+
+    @Override
+    public Optional<List<Catalogue>> findAll() {
+        return Optional.ofNullable(
+                em.createQuery("select catalogue from Catalogue catalogue", Catalogue.class)
+                        .getResultList()
+        );
+    }
 }

@@ -4,6 +4,7 @@ package com.school.project.schooldbproject.branch.dto;
 import com.school.project.schooldbproject.branch.entity.Branch;
 import com.school.project.schooldbproject.branch.entity.Inventory;
 import com.school.project.schooldbproject.catalogue.entity.Catalogue;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ import java.util.Date;
 
 @Getter
 @Setter
+@Builder
 public class CreateInventoryDto {
     @NotNull
     private Long catalogueId;
