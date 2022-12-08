@@ -28,9 +28,12 @@ public class AdminRepository {
                         "FROM payments as pa " +
                         "INNER JOIN order_details as od ON pa.payment_id = od.payment_id " +
                         "INNER JOIN catalogues as ca ON od.catalogue_id = ca.catalogue_id " +
-                        "WHERE pa.created_at >= PARSEDATETIME ( ? ,'yyyy-MM-dd hh:mm:ss') " +
-                        "AND pa.created_at <= PARSEDATETIME ( ? ,'yyyy-MM-dd hh:mm:ss') " +
+                        "WHERE pa.created_at >= ? " +
+                        "AND pa.created_at <= ? " +
                         "GROUP BY od.catalogue_id;";
+        // Local H2
+//                "WHERE pa.created_at >= PARSEDATETIME ( ? ,'yyyy-MM-dd hh:mm:ss') " +
+//                "AND pa.created_at <= PARSEDATETIME ( ? ,'yyyy-MM-dd hh:mm:ss') " +
 
         List<CatalogueSalesDto> catalogueSalesDtos = em.createNativeQuery(nativeQuery, "CataloguesSalesMapping")
                 .setParameter(1, begin)
@@ -38,6 +41,20 @@ public class AdminRepository {
                 .getResultList();
 
         return Optional.ofNullable(catalogueSalesDtos);
+
+        /**
+         * Todo: 네이티브 쿼리 수정 예정
+         * */
+//        em.createQuery("select pa from Payment pa " +
+//                        "inner join OrderDetail od on pa.id = od.payment.id " +
+//                        "inner join Catalogue ca on od.catalogue.id = ca.id " +
+//                        "where pa.createdAt between :begin and :end " +
+//                        "group by od.catalogue.id"
+//                )
+//                .setParameter("begin", begin)
+//                .setParameter("end", end)
+//                .getResultList();
+
     }
 
     public Optional<List<BranchSalesDto>> getBranchesSales(Date begin, Date end) {
@@ -45,15 +62,19 @@ public class AdminRepository {
                 "SELECT br.name, SUM(pa.total_price) as totalSales " +
                         "FROM payments as pa " +
                         "INNER JOIN branches br ON pa.branch_id = br.branch_id " +
-                        "WHERE pa.created_at >= PARSEDATETIME ( ? ,'yyyy-MM-dd hh:mm:ss') " +
-                        "AND pa.created_at <= PARSEDATETIME ( ? ,'yyyy-MM-dd hh:mm:ss') " +
+                        "WHERE pa.created_at >= ? " +
+                        "AND pa.created_at <= ? " +
                         "group by pa.branch_id;";
+        // Local H2
+//                "WHERE pa.created_at >= PARSEDATETIME ( ? ,'yyyy-MM-dd hh:mm:ss') " +
+//                "AND pa.created_at <= PARSEDATETIME ( ? ,'yyyy-MM-dd hh:mm:ss') " +
 
         List<BranchSalesDto> branchSalesDtos = em.createNativeQuery(nativeQuery, "BranchesSalesMapping")
                 .setParameter(1, begin)
                 .setParameter(2, end)
                 .getResultList();
 
+        return Optional.ofNullable(branchSalesDtos);
 
         /**
          * Todo: 네이티브 쿼리 수정 예정
@@ -66,7 +87,6 @@ public class AdminRepository {
 //                .setParameter("end", end)
 //                .getResultList();
 
-        return Optional.ofNullable(branchSalesDtos);
     }
 
 }
